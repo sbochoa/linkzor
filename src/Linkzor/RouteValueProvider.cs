@@ -8,7 +8,7 @@ namespace Linkzor
 {
     public class RouteValueProvider
     {
-        public RouteValueDictionary GetRouteValues(MethodCallExpression methodCall)
+        public static RouteValueDictionary GetRouteValues(MethodCallExpression methodCall)
         {
             var action = methodCall.Method;
             var arguments = methodCall.Arguments;

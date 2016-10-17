@@ -11,12 +11,11 @@ namespace Linkzor.Tests
         [Test]
         public void GetRouteValues_WithStringValue_ReturnsRouteValues()
         {
-            var message = "hello";
+            var message = "pong";
             Expression<Func<Ping, object>> expression = ping => ping.Pong(message);
             var methodCall = (MethodCallExpression)expression.Body;
-            var sut = new RouteValueProvider();
 
-            var routeValues = sut.GetRouteValues(methodCall);
+            var routeValues = RouteValueProvider.GetRouteValues(methodCall);
 
             routeValues[nameof(message)].ShouldBe(message);
         }
@@ -27,11 +26,10 @@ namespace Linkzor.Tests
             string message = null;
             Expression<Func<Ping, object>> expression = ping => ping.Pong(message);
             var methodCall = (MethodCallExpression)expression.Body;
-            var sut = new RouteValueProvider();
 
-            var routeValues = sut.GetRouteValues(methodCall);
+            var routeValues = RouteValueProvider.GetRouteValues(methodCall);
 
-            routeValues[nameof(message)].ShouldBe(message);
+            routeValues[nameof(message)].ShouldBeNull();
         }
 
         [Test]
@@ -39,16 +37,15 @@ namespace Linkzor.Tests
         {
             Expression<Func<Ping, object>> expression = ping => ping.Pong(Message());
             var methodCall = (MethodCallExpression)expression.Body;
-            var sut = new RouteValueProvider();
 
-            var routeValues = sut.GetRouteValues(methodCall);
+            var routeValues = RouteValueProvider.GetRouteValues(methodCall);
 
             routeValues["message"].ShouldBe(Message());
         }
 
-        private string Message()
+        private static string Message()
         {
-            return "hello";
+            return "pong";
         }
     }
 
